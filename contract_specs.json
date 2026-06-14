@@ -1,0 +1,2165 @@
+{
+  "_comment": "OKX USDT本位永续合约规格。\ncontract_size: 1张合约对应的标的物数量（如BTC为0.01，表示1张=0.01BTC）。\nmin_lot: 最小交易数量，单位为张（如BTC为0.01，表示最少交易0.01张）。\n用户可直接修改此文件以自定义合约规格。",
+  "contracts": {
+    "0G": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "1INCH": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "2Z": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "A": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AAOI": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AAPL": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AAVE": {
+      "contract_size": 0.1,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ACH": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ACT": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ACU": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ADA": {
+      "contract_size": 100.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ADBE": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AERO": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AEVO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AGLD": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AI": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AIXBT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ALGO": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ALLO": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AMAT": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AMD": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AMZN": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ANIME": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ANTHROPIC": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "APE": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "API3": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "APR": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "APT": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AR": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ARB": {
+      "contract_size": 10.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ARKM": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ARM": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ASML": {
+      "contract_size": 1.0,
+      "min_lot": 0.001,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ASTER": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ASTS": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ATH": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ATOM": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AUCTION": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AVAX": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AVGO": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AVNT": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AXS": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "AZTEC": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BABY": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BAND": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BARD": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BASED": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BAT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BB": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BCH": {
+      "contract_size": 0.1,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BE": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BEAT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BERA": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BICO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BIGTIME": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BILL": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BIO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BLEND": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BLUR": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BMNR": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BNB": {
+      "contract_size": 0.01,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BOME": {
+      "contract_size": 1000.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BONK": {
+      "contract_size": 100000.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BRETT": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BREV": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BSB": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BTC": {
+      "contract_size": 0.01,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BX": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "BZ": {
+      "contract_size": 0.01,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CBRS": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CC": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CELO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CFX": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CGNX": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CHIP": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CHZ": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CIEN": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CL": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "COAI": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "COHR": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "COIN": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "COMP": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CORE": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "COST": {
+      "contract_size": 1.0,
+      "min_lot": 0.001,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CRCL": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CRDO": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CRO": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CRV": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CRWD": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CRWV": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CSCO": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "CVX": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "DASH": {
+      "contract_size": 0.01,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "DELL": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "DOGE": {
+      "contract_size": 1000.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "DOOD": {
+      "contract_size": 1000.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "DOT": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "DRAM": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "DYDX": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "EDEN": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "EDGE": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "EGLD": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "EIGEN": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ENA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ENJ": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ENS": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ENSO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ESP": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ETC": {
+      "contract_size": 10.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ETH": {
+      "contract_size": 0.1,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ETHFI": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ETHW": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "EWJ": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "EWT": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "EWY": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "F": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "FARTCOIN": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "FIL": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "FLNC": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "FLOKI": {
+      "contract_size": 100000.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "FLOW": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "FOGO": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GALA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GAS": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GEV": {
+      "contract_size": 1.0,
+      "min_lot": 0.001,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GIGGLE": {
+      "contract_size": 0.01,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GLM": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GLW": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GME": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GMT": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GMX": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GOOGL": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GPS": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GRASS": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "GRT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "H": {
+      "contract_size": 100.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "HBAR": {
+      "contract_size": 100.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "HIMS": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "HMSTR": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "HOME": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "HOOD": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "HPE": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "HUMA": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "HYPE": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "HYUNDAI": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "IBM": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ICP": {
+      "contract_size": 0.01,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ICX": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "IMX": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "INFQ": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "INIT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "INJ": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "INTC": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "IOST": {
+      "contract_size": 1000.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "IOTA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "IP": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "IREN": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "IRYS": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ISRG": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "IWM": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "JELLYJELLY": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "JTO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "JUP": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "KAITO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "KAT": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "KGEN": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "KITE": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "KMNO": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "KSM": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LAB": {
+      "contract_size": 10.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LAYER": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LDO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LIGHT": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LINEA": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LINK": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LIT": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LITE": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LLY": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LPT": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LQTY": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LRC": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LTC": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LUNA": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "LUNR": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MAGIC": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MANA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MASK": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ME": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MEGA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MEME": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MERL": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MET": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "META": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "METIS": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MEW": {
+      "contract_size": 1000.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MINA": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MMT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MON": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MOODENG": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MORPHO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MOVE": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MRVL": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MSFT": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MSTR": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MU": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "MUBARAK": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NBIS": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NEAR": {
+      "contract_size": 10.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NEIRO": {
+      "contract_size": 1000.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NEO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NFLX": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NG": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NIGHT": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NMR": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NOK": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NOT": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NOW": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "NVDA": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "OFC": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "OKB": {
+      "contract_size": 0.01,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "OL": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ONDO": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ONE": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ONT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "OP": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "OPENAI": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "OPG": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "OPN": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ORCL": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ORDER": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ORDI": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PANW": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PARTI": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PENDLE": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PENGU": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PEOPLE": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PEPE": {
+      "contract_size": 10000000.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PI": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PIEVERSE": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PIPPIN": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PLTR": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PLUME": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PNUT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "POL": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "POPCAT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PROS": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PROVE": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PUMP": {
+      "contract_size": 1000.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "PYTH": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "QCOM": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "QNT": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "QQQ": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "QTUM": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RAVE": {
+      "contract_size": 10.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RAY": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RDW": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RECALL": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RENDER": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RESOLV": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RIVER": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RKLB": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RLS": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ROBO": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ROK": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RSR": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "RVN": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "S": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SAHARA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SAMSUNG": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SAND": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SAPIEN": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SATS": {
+      "contract_size": 10000000.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SEI": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SENT": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SHELL": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SHIB": {
+      "contract_size": 1000000.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SHLD": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SIGN": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SKHYNIX": {
+      "contract_size": 1.0,
+      "min_lot": 0.001,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SKY": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SLX": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SNDK": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SNX": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SOL": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SOON": {
+      "contract_size": 10.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SOPH": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SOXL": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SPACE": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SPCX": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SPK": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SPX": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SPY": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SSV": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "STABLE": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "STRK": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "STX": {
+      "contract_size": 10.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SUI": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SUSHI": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "SYRUP": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TAO": {
+      "contract_size": 0.01,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "THETA": {
+      "contract_size": 10.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TIA": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TON": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TRB": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TRIA": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TRUMP": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TRUST": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TRUTH": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TRX": {
+      "contract_size": 1000.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TSLA": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TSM": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TURBO": {
+      "contract_size": 10000.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "TWLO": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "UB": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "UMA": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "UNI": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "UP": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "URNM": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "USAR": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "USDC": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "USELESS": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "USO": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "VANA": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "VIRTUAL": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "VRT": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "W": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "WAL": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "WCT": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "WDC": {
+      "contract_size": 1.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "WET": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "WIF": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "WLD": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "WLFI": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "WOO": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XAG": {
+      "contract_size": 0.01,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XAU": {
+      "contract_size": 0.001,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XCU": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XLE": {
+      "contract_size": 1.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XLM": {
+      "contract_size": 100.0,
+      "min_lot": 0.1,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XPD": {
+      "contract_size": 0.001,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XPL": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XPT": {
+      "contract_size": 0.001,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XRP": {
+      "contract_size": 100.0,
+      "min_lot": 0.01,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "XTZ": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "YB": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "YFI": {
+      "contract_size": 0.0001,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "YGG": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZAMA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZBT": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZEC": {
+      "contract_size": 0.01,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZEN": {
+      "contract_size": 0.1,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZETA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZIL": {
+      "contract_size": 100.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZK": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZKP": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZORA": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZRO": {
+      "contract_size": 1.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    },
+    "ZRX": {
+      "contract_size": 10.0,
+      "min_lot": 1.0,
+      "base_asset": "",
+      "source": "okx_public_instruments"
+    }
+  }
+}
