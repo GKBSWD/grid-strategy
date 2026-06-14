@@ -43,10 +43,6 @@ Thumbs.db
 !data/BTC*
 !data/ETH*
 
-*.parquet
-*.xlsx
-*.html
-
 # Logs
 *.log
 debug.log
