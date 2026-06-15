@@ -15,11 +15,6 @@
 <td align="center"><img src="results/ETH1.png" alt="ETH回测结果1" width="300"/></td>
 <td align="center"><img src="results/CL1.png" alt="CL回测结果1" width="300"/></td>
 </tr>
-<tr>
-<td align="center">BTC 回测结果 1</td>
-<td align="center">ETH 回测结果 1</td>
-<td align="center">CL 回测结果 1</td>
-</tr>
 </table>
 
 <table>
@@ -27,11 +22,6 @@
 <td align="center"><img src="results/BTC2.png" alt="BTC回测结果2" width="300"/></td>
 <td align="center"><img src="results/ETH2.png" alt="ETH回测结果2" width="300"/></td>
 <td align="center"><img src="results/CL2.png" alt="CL回测结果2" width="300"/></td>
-</tr>
-<tr>
-<td align="center">BTC 回测结果 2</td>
-<td align="center">ETH 回测结果 2</td>
-<td align="center">CL 回测结果 2</td>
 </tr>
 </table>
 
