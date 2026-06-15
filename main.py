@@ -14,13 +14,13 @@ def parse_args():
     parser.add_argument('--symbol', type=str, default='ETH', help='交易品种: BTC, ETH, SOL, AVAX 等')
     parser.add_argument('--lower_bound', type=float, default=1110.88, help='价格区间下限')
     parser.add_argument('--upper_bound', type=float, default=2221.78 , help='价格区间上限')
-    parser.add_argument('--grid_count', type=int, default=200, help='网格数量')
+    parser.add_argument('--grid_count', type=int, default=100, help='网格数量')
     parser.add_argument('--grid_mode', type=str, default='等差', choices=['等差', '等比'], help='网格模式')
     parser.add_argument('--leverage', type=int, default=3, help='杠杆倍数')
     parser.add_argument('--direction', type=str, default='多', choices=['多', '空'], help='交易方向')
     parser.add_argument('--total_margin', type=float, default=10000, help='总保证金')
     parser.add_argument('--start_time', type=str, default='2026-05-28 00:00:00', help='回测起始时间')
-    parser.add_argument('--end_time', type=str, default='2026-06-11 00:00:00', help='回测结束时间')
+    parser.add_argument('--end_time', type=str, default='2026-06-11 23:59:59', help='回测结束时间')
     parser.add_argument('--kline_period', type=str, default='1m', help='K线周期')
     
     # 合约规格相关参数（可选）
@@ -55,10 +55,17 @@ def main():
     # 计算回测时间长度
     first_time = df.iloc[0]['timestamp']
     last_time = df.iloc[-1]['timestamp']
-    time_diff = last_time - first_time
+    # K线时间戳为开盘时间，最后一根K线还覆盖一个周期
+    if len(df) >= 2:
+        bar_interval = df.iloc[1]['timestamp'] - df.iloc[0]['timestamp']
+        actual_end = last_time + bar_interval
+    else:
+        from datetime import timedelta
+        actual_end = last_time + timedelta(minutes=1)
+    time_diff = actual_end - first_time
     
     days = time_diff.days
-    hours = time_diff.seconds // 3600
+    hours = (time_diff.seconds % 86400) // 3600
     minutes = (time_diff.seconds % 3600) // 60
     
     print(f"回测时长 {days}天 {hours}小时 {minutes}分钟")

@@ -206,32 +206,106 @@ class KlineData:
         except:
             return None
     
+    def _check_and_fill_gaps(self, df, symbol, start_time, end_time, bar):
+        """
+        检查K线数据时间连续性，若存在缺失则自动补获取
+        
+        :param df: 当前K线数据 DataFrame
+        :param symbol: 交易品种
+        :param start_time: 期望的起始时间
+        :param end_time: 期望的结束时间
+        :param bar: K线周期
+        :return: 修复后的 DataFrame
+        """
+        if df.empty:
+            return df
+        
+        bar_minutes = self._get_minutes_from_bar(bar)
+        expected_interval = timedelta(minutes=bar_minutes)
+        
+        # 确保按时间排序
+        df = df.sort_values('timestamp').drop_duplicates('timestamp').reset_index(drop=True)
+        
+        # 找出所有时间缺口
+        gaps = []
+        timestamps = df['timestamp'].tolist()
+        
+        # 检查起始时间到第一条数据之间是否有缺失
+        if timestamps[0] > start_time + expected_interval:
+            gaps.append((start_time, timestamps[0]))
+        
+        # 检查数据内部的缺口
+        for i in range(len(timestamps) - 1):
+            diff = timestamps[i + 1] - timestamps[i]
+            if diff > expected_interval * 1.5:  # 容忍1.5倍间隔（防止浮点误差）
+                gaps.append((timestamps[i], timestamps[i + 1]))
+        
+        # 检查最后一条数据到结束时间之间是否有缺失
+        if timestamps[-1] < end_time - expected_interval:
+            gaps.append((timestamps[-1], end_time))
+        
+        if not gaps:
+            self._log(f"✓ K线数据时间连续性检查通过，无缺失")
+            return df
+        
+        self._log(f"⚠ 发现 {len(gaps)} 个时间缺口，开始补获取...")
+        
+        all_new_klines = []
+        for gap_start, gap_end in gaps:
+            if self._check_stop():
+                self._log(f"⏹ 补获取被用户停止")
+                break
+            
+            # 缺口起始时间向后偏移一个周期（避免重复）
+            fetch_start = gap_start + expected_interval
+            fetch_end = gap_end - expected_interval
+            
+            if fetch_start >= fetch_end:
+                continue
+            
+            self._log(f"   补获取: [{fetch_start.strftime('%Y-%m-%d %H:%M')} - {fetch_end.strftime('%Y-%m-%d %H:%M')}]")
+            
+            new_df = self._fetch_data_from_sources(symbol, fetch_start, fetch_end, bar)
+            if new_df is not None and not new_df.empty:
+                all_new_klines.extend(new_df.to_dict('records'))
+                self._log(f"   ✓ 补获取到 {len(new_df)} 条K线")
+            else:
+                self._log(f"   ✗ 该缺口补获取失败")
+        
+        if all_new_klines:
+            new_records_df = pd.DataFrame(all_new_klines)
+            df = pd.concat([df, new_records_df], ignore_index=True)
+            df = df.sort_values('timestamp').drop_duplicates('timestamp').reset_index(drop=True)
+            self._log(f"✓ 缺口补获取完成，新增 {len(new_records_df)} 条，当前共 {len(df)} 条K线")
+        else:
+            self._log(f"⚠ 所有缺口补获取失败，数据仍可能存在缺失")
+        
+        return df
+    
     def _delete_old_data_files(self, symbol, bar, fmt='parquet'):
         """删除同标的同周期的旧数据文件"""
         import glob
         
-        # 删除旧格式文件: {symbol}_{bar}_klines.parquet
-        old_pattern = os.path.join(self.data_dir, f'{symbol}_{bar}_klines.{fmt}')
-        for filepath in glob.glob(old_pattern):
-            try:
-                os.remove(filepath)
-                print(f"删除旧格式文件: {filepath}")
-            except Exception as e:
-                print(f"删除文件失败 {filepath}: {e}")
+        # 删除所有匹配的数据文件（兼容新旧文件名格式）
+        patterns = [
+            os.path.join(self.data_dir, f'{symbol}_{bar}_klines.{fmt}'),
+            os.path.join(self.data_dir, f'{symbol}_{bar}_*_*.{fmt}'),
+        ]
         
-        # 删除新格式文件: {symbol}_{bar}_{start}_{end}.parquet
-        new_pattern = os.path.join(self.data_dir, f'{symbol}_{bar}_*_*.{fmt}')
-        for filepath in glob.glob(new_pattern):
-            try:
-                os.remove(filepath)
-                print(f"删除旧数据文件: {filepath}")
-            except Exception as e:
-                print(f"删除文件失败 {filepath}: {e}")
+        for pattern in patterns:
+            for filepath in glob.glob(pattern):
+                try:
+                    os.remove(filepath)
+                    self._log(f"   删除旧数据文件: {os.path.basename(filepath)}")
+                except Exception as e:
+                    self._log(f"   删除文件失败 {filepath}: {e}")
     
     def save_kline_to_fast_format(self, df, symbol, bar, fmt='parquet'):
-        """保存K线数据到快速格式（Parquet/Feather）"""
+        """保存K线数据到快速格式（Parquet/Feather）
+        文件名格式: {symbol}_{bar}_{start}_{end}_{count}根.parquet
+        """
         if fmt not in self.fast_formats:
-            print(f"不支持的格式: {fmt}")
+            self._log(f"不支持的格式: {fmt}")
             return None
         
         os.makedirs(self.data_dir, exist_ok=True)
@@ -239,12 +313,13 @@ class KlineData:
         # 获取数据的时间范围
         df_start = df['timestamp'].min()
         df_end = df['timestamp'].max()
+        total_count = len(df)
         
-        # 删除同标的同周期的旧数据文件，确保只有一份时间跨度最长的数据文件
+        # 删除同标的同周期的旧数据文件
         self._delete_old_data_files(symbol, bar, fmt)
         
-        # 新的文件名格式: {symbol}_{bar}_{start_time}_{end_time}.parquet
-        filename = f'{symbol}_{bar}_{self._format_time_for_filename(df_start)}_{self._format_time_for_filename(df_end)}.{fmt}'
+        # 新的文件名格式: {symbol}_{bar}_{start_time}_{end_time}_{count}k.parquet
+        filename = f'{symbol}_{bar}_{self._format_time_for_filename(df_start)}_{self._format_time_for_filename(df_end)}_{total_count}k.{fmt}'
         filepath = os.path.join(self.data_dir, filename)
         
         try:
@@ -252,10 +327,10 @@ class KlineData:
                 df.to_parquet(filepath, index=False)
             elif fmt == 'feather':
                 df.to_feather(filepath)
-            print(f"K线数据已保存到{fmt.upper()}格式: {filepath}")
+            self._log(f"✓ K线数据已保存到: {filename}")
             return filepath
         except Exception as e:
-            print(f"保存到{fmt.upper()}格式失败: {e}")
+            self._log(f"保存到{fmt.upper()}格式失败: {e}")
             return None
     
     def load_kline_from_excel(self, symbol, bar):
@@ -567,9 +642,12 @@ class KlineData:
             
             # 合并所有数据
             final_df = pd.concat(all_dfs, ignore_index=True)
-            final_df = final_df.sort_values('timestamp').drop_duplicates('timestamp')
+            final_df = final_df.sort_values('timestamp').drop_duplicates('timestamp').reset_index(drop=True)
             
             self._log(f"\n✓ 增量更新完成，共 {len(final_df)} 条K线")
+            
+            # 检查时间连续性并补获取缺失数据
+            final_df = self._check_and_fill_gaps(final_df, symbol, start_time, end_time, bar)
             
             # 保存合并后的数据
             self.save_kline_to_fast_format(final_df, symbol, bar, 'parquet')
@@ -600,8 +678,11 @@ class KlineData:
             
             final_df = pd.DataFrame(all_klines)
             if not final_df.empty:
-                final_df = final_df.sort_values('timestamp').drop_duplicates('timestamp')
+                final_df = final_df.sort_values('timestamp').drop_duplicates('timestamp').reset_index(drop=True)
                 self._log(f"\n✓ 数据获取完成，共获取 {len(final_df)} 条K线")
+                
+                # 检查时间连续性并补获取缺失数据
+                final_df = self._check_and_fill_gaps(final_df, symbol, start_time, end_time, bar)
                 
                 # 保存到Parquet格式（高效存储）
                 self.save_kline_to_fast_format(final_df, symbol, bar, 'parquet')

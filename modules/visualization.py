@@ -43,7 +43,7 @@ class Visualization:
             mode='lines',
             name='收益率',
             line=dict(color='#ff7f0e', width=2),
-            hovertemplate='时间: %{x}<br>收益率: %{y:.2f}%<br>收益额: $%{customdata[0]:.2f}<br>权益: $%{customdata[1]:.2f}<br>标的价格: $%{customdata[2]:.2f}<extra></extra>',
+            hovertemplate='时间: %{x|%Y-%m-%d %H}:00<br>收益率: %{y:.2f}%<br>收益额: $%{customdata[0]:.2f}<br>权益: $%{customdata[1]:.2f}<br>标的价格: $%{customdata[2]:.2f}<extra></extra>',
             customdata=df[['pnl', 'equity', 'price']]
         ))
         
@@ -57,7 +57,7 @@ class Visualization:
                 line=dict(color='#1f77b4', width=2),
                 yaxis='y2',
                 visible='legendonly',  # 默认隐藏，通过图例开关控制
-                hovertemplate='时间: %{x}<br>价格: $%{y:.2f}<extra></extra>'  # 只显示时间和价格
+                hovertemplate='时间: %{x|%Y-%m-%d %H}:00<br>价格: $%{y:.2f}<extra></extra>'  # 只显示时间和价格
         ))
         
         # 计算收益率纵轴范围（增大显示范围，上下各留40%余量）
@@ -121,7 +121,7 @@ class Visualization:
             mode='lines',
             name='套利次数',
             line=dict(color='#d62728', width=2),
-            hovertemplate='时间: %{x}<br>套利次数: %{y}<br>标的价格: $%{customdata:.2f}<extra></extra>',
+            hovertemplate='时间: %{x|%Y-%m-%d %H}:00<br>套利次数: %{y}<br>标的价格: $%{customdata:.2f}<extra></extra>',
             customdata=df['price']
         ))
         
@@ -135,7 +135,7 @@ class Visualization:
                 line=dict(color='#1f77b4', width=2),
                 yaxis='y2',
                 visible='legendonly',  # 默认隐藏，通过图例开关控制
-                hovertemplate='时间: %{x}<br>价格: $%{y:.2f}<extra></extra>'  # 只显示时间和价格
+                hovertemplate='时间: %{x|%Y-%m-%d %H}:00<br>价格: $%{y:.2f}<extra></extra>'  # 只显示时间和价格
         ))
         
         # 计算套利次数纵轴范围（增大显示范围，上下各留20%余量）

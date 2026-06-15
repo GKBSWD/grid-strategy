@@ -263,7 +263,7 @@ class GridTradingGUI:
         
         self.lower_bound = tk.Entry(price_entry_frame, width=10, font=('Segoe UI', 11), bd=1, relief='solid')
         self.lower_bound.grid(row=0, column=1, sticky="w", padx=(0, 5))
-        self.lower_bound.insert(0, "309.5")
+        self.lower_bound.insert(0, "40000")
         
         # 绑定焦点离开事件，自动解析带逗号的数字
         def on_lower_focus_out(event):
@@ -287,7 +287,7 @@ class GridTradingGUI:
         
         self.upper_bound = tk.Entry(price_entry_frame, width=10, font=('Segoe UI', 11), bd=1, relief='solid')
         self.upper_bound.grid(row=0, column=3, sticky="e", padx=(5, 0))
-        self.upper_bound.insert(0, "619")
+        self.upper_bound.insert(0, "80000")
         
         # 绑定焦点离开事件，自动解析带逗号的数字
         def on_upper_focus_out(event):
@@ -349,7 +349,7 @@ class GridTradingGUI:
         tk.Label(basic_frame, text="结束时间:", bg=self.colors['bg_frame'],
                 fg=self.colors['text'], font=('Segoe UI', 11)).grid(row=12, column=0, sticky="e", pady=5, padx=(0, 10))
         self.end_time = tk.Entry(basic_frame, width=18, font=('Segoe UI', 11), bd=1, relief='solid')
-        self.end_time.insert(0, "2026-06-11 00:00:00")
+        self.end_time.insert(0, "2026-06-11 23:59:00")
         self.end_time.grid(row=12, column=1, sticky="ew", pady=5)  # 改为 ew 使输入框填满整列
         
         self.create_label_entry(basic_frame, "K线周期:", "kline_period", "1m", row=13)
@@ -568,9 +568,9 @@ class GridTradingGUI:
         """重置参数为默认值"""
         self.symbol.set("BTC")  # Combobox使用set方法
         self.lower_bound.delete(0, tk.END)
-        self.lower_bound.insert(0, "309.5")
+        self.lower_bound.insert(0, "40000")
         self.upper_bound.delete(0, tk.END)
-        self.upper_bound.insert(0, "619")
+        self.upper_bound.insert(0, "80000")
         self.grid_count.delete(0, tk.END)
         self.grid_count.insert(0, "200")
         self.grid_mode.set("等差")
@@ -582,7 +582,7 @@ class GridTradingGUI:
         self.start_time.delete(0, tk.END)
         self.start_time.insert(0, "2026-05-12 00:00:00")
         self.end_time.delete(0, tk.END)
-        self.end_time.insert(0, "2026-06-11 00:00:00")
+        self.end_time.insert(0, "2026-06-11 23:59:59")
         self.kline_period.delete(0, tk.END)
         self.kline_period.insert(0, "1m")
         # 重置时从 contract_specs.json 读取当前品种的值
@@ -708,9 +708,15 @@ class GridTradingGUI:
 
             first_time = df.iloc[0]['timestamp']
             last_time = df.iloc[-1]['timestamp']
-            time_diff = last_time - first_time
+            # K线时间戳为开盘时间，最后一根K线还覆盖一个周期
+            if len(df) >= 2:
+                bar_interval = df.iloc[1]['timestamp'] - df.iloc[0]['timestamp']
+                actual_end = last_time + bar_interval
+            else:
+                actual_end = last_time + timedelta(minutes=1)
+            time_diff = actual_end - first_time
             days = time_diff.days
-            hours = time_diff.seconds // 3600
+            hours = (time_diff.seconds % 86400) // 3600
             minutes = (time_diff.seconds % 3600) // 60
             self.log(f"回测时长 {days}天 {hours}小时 {minutes}分钟")
 

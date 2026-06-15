@@ -410,15 +410,20 @@ class Backtester:
         equity_df = pd.DataFrame(self.equity_curve)
         equity_df['timestamp'] = pd.to_datetime(equity_df['timestamp'])
         
-        # 计算回测周期（使用数据的实际时间范围）
-        if not self.data.empty:
+        # 计算回测周期（K线时间戳为开盘时间，最后一根K线实际还覆盖一个周期）
+        if not self.data.empty and len(self.data) >= 2:
             start_time = self.data['timestamp'].iloc[0]
             end_time = self.data['timestamp'].iloc[-1]
-            days = (end_time - start_time).total_seconds() / (24 * 3600)
+            # 从相邻K线时间差推算单根K线周期
+            bar_interval = self.data['timestamp'].iloc[1] - self.data['timestamp'].iloc[0]
+            actual_end = end_time + bar_interval  # 最后一根K线的实际结束时间
+            total_seconds = (actual_end - start_time).total_seconds()
+            days = total_seconds / (24 * 3600)
             # 确保至少有一天
-            days = max(days, 1)
+            days = max(days, 1 / 1440)  # 最小精度为1分钟
         else:
             days = 1
+            total_seconds = 86400
         
         if not equity_df.empty:
             # 计算最大回撤
@@ -462,6 +467,8 @@ class Backtester:
         
         return {
             'initial_margin': self.total_margin,
+            'backtest_days': days,
+            'backtest_seconds': total_seconds,
             'final_equity': final_equity,
             'total_pnl': self.total_pnl,  # 总利润 = (已实现利润 - 手续费) + 未实现利润
             'realized_pnl': realized_pnl_with_fee,  # 已实现利润 = 平仓收益 - 总手续费
@@ -485,6 +492,18 @@ class Backtester:
         # 使用自定义打印函数，默认为print
         p = print_func if print_func is not None else print
         
+        # 输出回测周期信息
+        days = results['backtest_days']
+        total_secs = int(results['backtest_seconds'])
+        d = total_secs // 86400
+        h = (total_secs % 86400) // 3600
+        m = (total_secs % 3600) // 60
+        period_parts = []
+        if d > 0: period_parts.append(f"{d}天")
+        if h > 0: period_parts.append(f"{h}小时")
+        if m > 0: period_parts.append(f"{m}分钟")
+        period_str = ''.join(period_parts) if period_parts else '0分钟'
+        p(f"回测周期: {period_str}（{days:.4f}天）")
         p(f"最终权益: {results['final_equity']:.2f} USDT")
         p(f"总利润: {results['total_pnl']:.2f} USDT")
         p(f"  - 已实现利润: {results['realized_pnl']:.2f} USDT")

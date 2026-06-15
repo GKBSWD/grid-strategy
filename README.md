@@ -2,11 +2,38 @@
 
 基于 Python 的合约网格策略历史回测系统，采用Trae、Qoder辅助开发，支持从 Binance交易所获取 USDT 本位永续合约K线数据，进行网格策略回测并生成可视化报告。
 
-## 示例结果图
-
+## 回测示例图
+### BTC回测示例
 ![示例结果图1](results/1.png)
 
 ![示例结果图2](results/2.png)
+
+### 回测与AI策略对比
+<table>
+<tr>
+<td align="center"><img src="results/BTC1.png" alt="BTC回测结果1" width="300"/></td>
+<td align="center"><img src="results/ETH1.png" alt="ETH回测结果1" width="300"/></td>
+<td align="center"><img src="results/CL1.png" alt="CL回测结果1" width="300"/></td>
+</tr>
+<tr>
+<td align="center">BTC 回测结果 1</td>
+<td align="center">ETH 回测结果 1</td>
+<td align="center">CL 回测结果 1</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td align="center"><img src="results/BTC2.png" alt="BTC回测结果2" width="300"/></td>
+<td align="center"><img src="results/ETH2.png" alt="ETH回测结果2" width="300"/></td>
+<td align="center"><img src="results/CL2.png" alt="CL回测结果2" width="300"/></td>
+</tr>
+<tr>
+<td align="center">BTC 回测结果 2</td>
+<td align="center">ETH 回测结果 2</td>
+<td align="center">CL 回测结果 2</td>
+</tr>
+</table>
 
 ## 功能特点
 
@@ -15,6 +42,7 @@
 - **K线内分阶段模拟**：阳线/阴线各分 3 个阶段模拟价格运动，精确检测网格触发
 - **初始建仓统一价**：所有网格以第一根 K 线收盘价统一市价开仓
 - **增量数据更新**：本地 Parquet 缓存（若无会自动获取并保存），仅从 API 获取缺失时间段数据并保存
+- **K线数据连续性检查**：保存前自动检测时间戳缺口，发现缺失自动补获取，避免因数据断层导致回测失真
 - **交互式报告**：基于 Plotly 生成 HTML 报告，含收益率曲线、套利次数曲线等
 - **GUI 图形界面**：Tkinter 图形界面，支持参数配置、进度显示、停止回测
 - **合约规格自动填充**：选择交易品种后自动从 `contract_specs.json` 读取合约规格和最小交易单位
@@ -38,6 +66,24 @@ grid_test/
 ├── results/                  # 回测结果输出目录（xlsx + html）
 └── dist/GridTrading.exe      # 打包好的可执行程序
 ```
+
+### K线数据文件命名规则
+
+`data/` 目录下的 Parquet 缓存文件命名格式：
+
+```
+{symbol}_{bar}_{start}_{end}_{count}k.parquet
+```
+
+| 字段 | 说明 | 示例 |
+|:----|:----|:----|
+| symbol | 交易品种 | BTC |
+| bar | K线周期 | 1m |
+| start | 起始时间 | 20260501_000000 |
+| end | 结束时间 | 20260601_000000 |
+| count | K线总根数（后缀 k） | 44641k |
+
+示例：`BTC_1m_20260501_000000_20260601_000000_44641k.parquet`
 
 ## 快速开始
 
@@ -88,10 +134,10 @@ python main.py --symbol ETH --lower_bound 1110.88 --upper_bound 2221.78 \
 | 杠杆倍数 | 交易杠杆（实际使用时会受安全杠杆限制） |
 | 交易方向 | 多（做多）/空（做空）单向网格 |
 | 总保证金 | 投入的总保证金（USDT） |
-| 合约规格 | 1张合约对应的标的物数量（如 BTC=0.01） |
+| 合约规格 | 1张合约对应的标的物数量（如 1 张BTC= 0.01 BTC） |
 | 最小交易单位 | 最小交易张数（如 0.01 张） |
 | 手续费 | 市价/限价手续费率（百分比值，如 0.05 表示 0.05%） |
-| 起始/结束时间 | 回测时间范围 |
+| 起始/结束时间 | 回测时间范围（结束时间建议设为XX:59:00且$\lfloor      {current\_time}-{end\_time} \rfloor$>1h，避免获取失败） |
 | K线周期 | 如 1m（1分钟）、5m、15m 等 |
 
 ## 合约规格管理
@@ -109,7 +155,7 @@ python fetch_specs.py
 ## 核心算法
 
 - **等差网格**：价格区间均匀划分，每个网格固定张数
-- **安全杠杆**：确保极端情况（所有网格开仓）下强平价在安全边界外
+- **安全杠杆**：确保极端情况（所有网格开仓）下强平价在价格区间外
 - **K线内分阶段**：阳线按 开盘→最低→最高→收盘 顺序模拟，阴线按 开盘→最高→最低→收盘 顺序模拟
 
 ## 回测结果指标
