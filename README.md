@@ -1,6 +1,6 @@
 # 合约网格策略回测系统
 
-基于 Python 的合约网格策略历史回测系统，采用Trae、Qoder辅助开发，支持从 **Binance 交易所**获取 USDT 本位永续合约K线数据，进行网格策略回测并生成可视化报告。
+基于 Python 的合约网格策略历史回测系统，采用Trae、Qoder辅助开发，支持从 Binance交易所获取 USDT 本位永续合约K线数据，进行网格策略回测并生成可视化报告。
 
 ## 示例结果图
 
@@ -36,8 +36,7 @@ grid_test/
 │   └── visualization.py      # 可视化报告生成（Plotly HTML）
 ├── data/                     # K线数据缓存目录（Parquet 格式）
 ├── results/                  # 回测结果输出目录（xlsx + html）
-├── dist/GridTrading.exe      # 打包好的可执行程序
-└── .venv/                    # Python 虚拟环境
+└── dist/GridTrading.exe      # 打包好的可执行程序
 ```
 
 ## 快速开始
@@ -65,6 +64,17 @@ python gui.py
 
 # 或命令行回测
 python main.py --symbol ETH --lower_bound 1110.88 --upper_bound 2221.78 --grid_count 200 --leverage 3 --direction 多 --total_margin 10000
+```
+
+## CLI 命令行参数
+
+```bash
+python main.py --symbol ETH --lower_bound 1110.88 --upper_bound 2221.78 \
+               --grid_count 200 --grid_mode 等差 --leverage 3 \
+               --direction 多 --total_margin 10000 \
+               --start_time "2026-05-28 00:00:00" --end_time "2026-06-11 00:00:00" \
+               --kline_period 1m --contract_size 0.1 --min_lot_size 0.01 \
+               --taker_fee 0.0005 --maker_fee 0.0002
 ```
 
 ## GUI 参数说明
@@ -96,17 +106,6 @@ python fetch_specs.py
 
 该命令会从 OKX API 获取全部 USDT 本位永续合约的规格数据（contract_size 和 min_lot），并保存到 `contract_specs.json`。
 
-## CLI 命令行参数
-
-```bash
-python main.py --symbol ETH --lower_bound 1110.88 --upper_bound 2221.78 \
-               --grid_count 200 --grid_mode 等差 --leverage 3 \
-               --direction 多 --total_margin 10000 \
-               --start_time "2026-05-28 00:00:00" --end_time "2026-06-11 00:00:00" \
-               --kline_period 1m --contract_size 0.1 --min_lot_size 0.01 \
-               --taker_fee 0.0005 --maker_fee 0.0002
-```
-
 ## 核心算法
 
 - **等差网格**：价格区间均匀划分，每个网格固定张数
@@ -119,49 +118,49 @@ python main.py --symbol ETH --lower_bound 1110.88 --upper_bound 2221.78 \
 
 回测完成后，系统会在控制台打印以下指标：
 
-#### 1. **最终权益** (`final_equity`)
+#### 1. **最终权益** (**final_equity**)
 - **含义**: 回测结束时账户总资金（可用保证金 + 持仓保证金 + 总盈亏）
-- **计算公式**: `可用保证金 + 持仓保证金 + 总利润`
+- **计算公式**: 可用保证金 + 持仓保证金 + 总利润
 
-#### 2. **总利润** (`total_pnl`)
+#### 2. **总利润** (**total_pnl**)
 - **含义**: 回测期间账户净收益
-- **计算公式**: `(已实现利润 - 总手续费) + 未实现利润`
+- **计算公式**: (已实现利润 - 总手续费) + 未实现利润
 
-##### 2.1 **已实现利润** (`realized_pnl`)
+##### 2.1 **已实现利润** (**realized_pnl**)
 - **含义**: 所有平仓交易的净收益（扣除手续费）
 - **计算公式**: 平仓收益 - 总手续费
 
-##### 2.2 **未实现利润** (`unrealized_pnl`)
+##### 2.2 **未实现利润** (**unrealized_pnl**)
 - **含义**: 当前持仓按最后价格计算的浮动盈亏
 
-##### 2.3 **网格套利利润** (`grid_arbitrage_pnl`)
+##### 2.3 **网格套利利润** (**grid_arbitrage_pnl**)
 - **含义**: 纯粹网格套利收益（排除初始建仓影响）
-- **计算公式**: `套利次数 × 网格间距 × 单网格数量 - 网格交易手续费`
+- **计算公式**: 套利次数 × 网格间距 × 单网格数量 - 网格交易手续费
 
-#### 3. **总手续费** (`total_fee`)
+#### 3. **总手续费** (**total_fee**)
 - **含义**: 回测期间支付的所有手续费
 - **组成**: 初始建仓市价手续费 + 后续交易限价手续费
 
-#### 4. **网格套利次数** (`grid_arbitrage_count`)
+#### 4. **网格套利次数** (**grid_arbitrage_count**)
 - **含义**: 成功完成的网格套利交易次数（低买高卖或高卖低买）
 
-#### 5. **收益率** (`return_rate`)
+#### 5. **收益率** (**return_rate**)
 - **含义**: 回测期间总收益率
-- **计算公式**: `(总利润 / 初始保证金) × 100%`
+- **计算公式**: (总利润 / 初始保证金) × 100%
 
-#### 6. **年化收益率** (`annualized_return`)
+#### 6. **年化收益率** (**annualized_return**)
 - **含义**: 将回测收益折算为年化收益率
-- **计算公式**: `收益率 × (365 / 回测天数)`
+- **计算公式**: 收益率 × (365 / 回测天数)
 
-#### 7. **网格套利年化收益率** (`grid_annualized_return`)
+#### 7. **网格套利年化收益率** (**grid_annualized_return**)
 - **含义**: 基于纯粹网格套利收益的年化收益率
-- **计算公式**: `(网格套利利润 / 初始保证金) × (365 / 回测天数) × 100%`
+- **计算公式**: (网格套利利润 / 初始保证金) × (365 / 回测天数) × 100%
 
-#### 8. **最大回撤** (`max_drawdown`)
+#### 8. **最大回撤** (**max_drawdown**)
 - **含义**: 回测期间权益从峰值到谷值的最大跌幅
 - **重要性**: 衡量策略最大风险水平
 
-#### 9. **未平仓持仓** (`open_positions`)
+#### 9. **未平仓持仓** (**open_positions**)
 - **含义**: 回测结束时尚未平仓的网格数量
 
 ### 文件输出结果
@@ -198,3 +197,6 @@ python main.py --symbol ETH --lower_bound 1110.88 --upper_bound 2221.78 \
 - 数据获取失败原因：VPN、访问限制、时间周期超出范围等
 
 - 项目中可能存在潜在BUG、回测结果数据仅供参考
+
+
+由于本人非CS相关专业出身，能力与时间有限，大家有兴趣的可以在此基础上进行优化改进！

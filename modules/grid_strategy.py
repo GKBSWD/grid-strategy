@@ -172,7 +172,7 @@ class GridStrategy:
             # 用平均价格计算基准张数，所有网格统一用这个张数
             avg_grid_price = self.calculate_portfolio_avg_entry()
             position_size_per_grid = position_value_per_grid / avg_grid_price
-            lots_per_grid = round(position_size_per_grid / self.contract_size, 2)
+            lots_per_grid = position_size_per_grid / self.contract_size
             self.safe_lots_per_grid = max(lots_per_grid, self.min_lot_size)
             self.notional_per_grid = None
         else:
@@ -182,7 +182,7 @@ class GridStrategy:
             # 用平均价格计算一个基准张数（仅供参考显示）
             avg_grid_price = self.calculate_portfolio_avg_entry()
             reference_size = position_value_per_grid / avg_grid_price
-            reference_lots = round(reference_size / self.contract_size, 2)
+            reference_lots = reference_size / self.contract_size
             self.safe_lots_per_grid = max(reference_lots, self.min_lot_size)
         
         return self.safe_lots_per_grid
@@ -352,8 +352,9 @@ class GridStrategy:
             prec = 4
         else:
             prec = 2
-        amt_str = f"{position_amt:.{prec}f}".rstrip('0').rstrip('.')
-        p(f"  开仓数量: {amt_str} {self.contract_type}")
+        # 显示时保留4位小数，但内部计算仍使用原始精度
+        display_amt = f"{position_amt:.4f}"
+        p(f"  开仓数量: {display_amt} {self.contract_type}")
         
         # 预估强平价（所有网格都开仓时）
         safety_results = self.verify_strategy_safety(total_margin)

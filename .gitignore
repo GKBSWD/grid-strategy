@@ -48,8 +48,6 @@ Thumbs.db
 debug.log
 
 # Build
-/dist/
-/build/
 *.spec
 
 # Temporary files

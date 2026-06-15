@@ -308,10 +308,6 @@ class Visualization:
         
         <div class="summary-card">
             <div class="card">
-                <div class="label">初始保证金</div>
-                <div class="value">${self.results['initial_margin']:.2f}</div>
-            </div>
-            <div class="card">
                 <div class="label">最终权益</div>
                 <div class="value">${self.results['final_equity']:.2f}</div>
             </div>
@@ -324,12 +320,16 @@ class Visualization:
                 <div class="value">{self.results['return_rate']:.2f}%</div>
             </div>
             <div class="card">
+                <div class="label">网格套利利润</div>
+                <div class="value">${self.results['grid_arbitrage_pnl']:.2f}</div>
+            </div>
+            <div class="card">
                 <div class="label">网格套利次数</div>
                 <div class="value">{self.results['grid_arbitrage_count']}</div>
             </div>
             <div class="card">
-                <div class="label">总手续费</div>
-                <div class="value">${self.results['total_fee']:.2f}</div>
+                <div class="label">网格套利年化收益率</div>
+                <div class="value">{self.results['grid_annualized_return']:.2f}%</div>
             </div>
             <div class="card">
                 <div class="label">最大回撤</div>
