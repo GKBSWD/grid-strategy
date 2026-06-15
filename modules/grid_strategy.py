@@ -173,7 +173,7 @@ class GridStrategy:
             avg_grid_price = self.calculate_portfolio_avg_entry()
             position_size_per_grid = position_value_per_grid / avg_grid_price
             lots_per_grid = position_size_per_grid / self.contract_size
-            self.safe_lots_per_grid = max(lots_per_grid, self.min_lot_size)
+            self.safe_lots_per_grid = self._round_lots(max(lots_per_grid, self.min_lot_size))
             self.notional_per_grid = None
         else:
             # 等比网格：固定名义价值开仓
@@ -183,7 +183,7 @@ class GridStrategy:
             avg_grid_price = self.calculate_portfolio_avg_entry()
             reference_size = position_value_per_grid / avg_grid_price
             reference_lots = reference_size / self.contract_size
-            self.safe_lots_per_grid = max(reference_lots, self.min_lot_size)
+            self.safe_lots_per_grid = self._round_lots(max(reference_lots, self.min_lot_size))
         
         return self.safe_lots_per_grid
     
@@ -305,6 +305,22 @@ class GridStrategy:
         """将实际数量转换为张数"""
         return size / self.contract_size
     
+    def _round_lots(self, lots):
+        """将张数四舍五入到最小交易单位的整数倍，并确保不低于最小交易单位"""
+        if self.min_lot_size <= 0:
+            return lots
+        rounded = round(lots / self.min_lot_size) * self.min_lot_size
+        return max(rounded, self.min_lot_size)
+    
+    def _get_lot_decimals(self):
+        """根据最小交易单位推算张数显示的小数位数"""
+        if self.min_lot_size >= 1:
+            return 0
+        s = str(self.min_lot_size)
+        if '.' in s:
+            return len(s.split('.')[1])
+        return 0
+    
     def get_grid_price(self, index):
         """获取指定索引的网格价格"""
         if 0 <= index < len(self.grids):
@@ -341,18 +357,9 @@ class GridStrategy:
         
         p(f"\n单网格开仓参数:")
         p(f"  实际杠杆: {self.actual_leverage:.2f}x")
-        p(f"  开仓张数: {self.safe_lots_per_grid:.2f} 张")
+        lot_decimals = self._get_lot_decimals()
+        p(f"  开仓张数: {self.safe_lots_per_grid:.{lot_decimals}f} 张")
         position_amt = self.lots_to_size(self.safe_lots_per_grid)
-        # 根据数值大小动态决定小数位，确保最小单位能清晰显示
-        if position_amt < 0.001:
-            prec = 8
-        elif position_amt < 0.01:
-            prec = 6
-        elif position_amt < 1:
-            prec = 4
-        else:
-            prec = 2
-        # 显示时保留4位小数，但内部计算仍使用原始精度
         display_amt = f"{position_amt:.4f}"
         p(f"  开仓数量: {display_amt} {self.contract_type}")
         
@@ -379,7 +386,7 @@ class GridStrategy:
             initial_positions = self.get_initial_positions(init_price)
             p(f"\n初始建仓信息 (entry_price = {init_price:.2f}):")
             p(f"  初始建仓网格数量: {len(initial_positions)}")
-            p(f"  初始持仓张数: {len(initial_positions) * self.safe_lots_per_grid:.2f} 张")
+            p(f"  初始持仓张数: {len(initial_positions) * self.safe_lots_per_grid:.{lot_decimals}f} 张")
 
     
     def get_strategy_summary(self, total_margin, init_price=None):
