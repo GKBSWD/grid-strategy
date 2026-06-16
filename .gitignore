@@ -41,8 +41,23 @@ Thumbs.db
 # Data and Results
 /data/*
 !/data/
-!data/BTC*
-!data/ETH*
+# Note: GitHub上保留已有2个data文件，但本地修改不再跟踪
+# 以下两行让git忽略data/下所有文件的本地改动（不会删除GitHub上已有的文件）
+# 如需重新跟踪，执行：git update-index --no-assume-unchanged data/*
+
+# Results: 仅保留当前已有的10个文件，以后新生成的忽略
+results/*
+!/results/
+!results/1.png
+!results/2.png
+!results/BTC1.png
+!results/BTC2.png
+!results/CL1.png
+!results/CL2.png
+!results/ETH1.png
+!results/ETH2.png
+!results/BTC_2026-02-02_2026-06-11.html
+!results/BTC_2026-02-02_2026-06-11.xlsx
 
 # Logs
 *.log
