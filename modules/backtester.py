@@ -489,9 +489,20 @@ class Backtester:
     
     def print_results(self, results, print_func=None):
         """打印回测结果"""
-        # 使用自定义打印函数，默认为print
         p = print_func if print_func is not None else print
-        
+
+        # 显示实际回测数据的时间范围和K线数
+        if not self.data.empty:
+            data_start = self.data['timestamp'].iloc[0]
+            data_end = self.data['timestamp'].iloc[-1]
+            if len(self.data) >= 2:
+                bar_interval = self.data['timestamp'].iloc[1] - self.data['timestamp'].iloc[0]
+                actual_end_time = data_end + bar_interval
+            else:
+                actual_end_time = data_end
+            p(f"回测数据: {len(self.data)} 条K线")
+            p(f"数据时间: [{data_start.strftime('%Y-%m-%d %H:%M:%S')} 至 {actual_end_time.strftime('%Y-%m-%d %H:%M:%S')}]")
+
         # 输出回测周期信息
         days = results['backtest_days']
         total_secs = int(results['backtest_seconds'])

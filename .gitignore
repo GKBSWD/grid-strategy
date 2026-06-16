@@ -20,6 +20,8 @@ wheels/
 *.egg
 MANIFEST
 
+test*
+
 # Virtual Environment
 .venv/
 env/

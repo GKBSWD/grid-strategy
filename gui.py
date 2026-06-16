@@ -714,11 +714,24 @@ class GridTradingGUI:
                 actual_end = last_time + bar_interval
             else:
                 actual_end = last_time + timedelta(minutes=1)
+
+            # 显示用户请求时间范围 vs 实际回测时间范围
+            data_start_str = first_time.strftime('%Y-%m-%d %H:%M:%S')
+            data_end_str = actual_end.strftime('%Y-%m-%d %H:%M:%S')
+            user_start_str = start_time.strftime('%Y-%m-%d %H:%M:%S')
+            user_end_str = end_time.strftime('%Y-%m-%d %H:%M:%S')
+
+            self.log(f"用户请求时间: [{user_start_str} 至 {user_end_str}]")
+            self.log(f"实际回测时间: [{data_start_str} 至 {data_end_str}]")
+
+            if first_time > start_time or actual_end < end_time:
+                self.log(f"⚠ 实际数据范围小于请求范围（可能部分数据获取失败），回测将基于实际可用数据进行")
+
             time_diff = actual_end - first_time
             days = time_diff.days
             hours = (time_diff.seconds % 86400) // 3600
             minutes = (time_diff.seconds % 3600) // 60
-            self.log(f"回测时长 {days}天 {hours}小时 {minutes}分钟")
+            self.log(f"实际回测时长 {days}天 {hours}小时 {minutes}分钟（{len(df)} 条K线）")
 
             init_price = df.iloc[0]['close']
 

@@ -64,25 +64,39 @@ class KlineData:
         mapping = {'1m': 1, '5m': 5, '15m': 15, '1h': 60, '4h': 240, '1d': 1440}
         return mapping.get(bar, 5)
     
+    def _beijing_to_utc_ms(self, dt_beijing):
+        """将北京时间(naive datetime, UTC+8)转换为Binance API使用的UTC毫秒时间戳"""
+        import time as _time
+        epoch = datetime(1970, 1, 1)
+        # 减去8小时得到UTC时间，再计算时间戳
+        dt_utc = dt_beijing - timedelta(hours=8)
+        return int((dt_utc - epoch).total_seconds() * 1000)
+
+    def _utc_ms_to_beijing(self, utc_ms):
+        """将Binance返回的UTC毫秒时间戳转换为北京时间(naive datetime, UTC+8)"""
+        return datetime.utcfromtimestamp(utc_ms / 1000) + timedelta(hours=8)
+
     def _fetch_binance_batch(self, symbol, start_time, end_time, interval, request_id):
-        """获取单个批次的Binance K线数据"""
+        """获取单个批次的Binance K线数据
+        注意: start_time, end_time 为北京时间(naive datetime, UTC+8)
+        """
         params = {
             'symbol': f'{symbol}USDT',
             'interval': interval,
             'limit': 1000,
-            'startTime': int(start_time.timestamp() * 1000),
-            'endTime': int(end_time.timestamp() * 1000)
+            'startTime': self._beijing_to_utc_ms(start_time),
+            'endTime': self._beijing_to_utc_ms(end_time)
         }
-        
+
         for attempt in range(self.max_retries):
             try:
                 response = requests.get('https://fapi.binance.com/fapi/v1/klines', params=params, timeout=15)
                 response.raise_for_status()
                 data = response.json()
-                
+
                 klines = []
                 for candle in data:
-                    ts = datetime.fromtimestamp(int(candle[0]) / 1000)
+                    ts = self._utc_ms_to_beijing(int(candle[0]))
                     klines.append({
                         'timestamp': ts,
                         'open': float(candle[1]),
@@ -208,79 +222,150 @@ class KlineData:
     
     def _check_and_fill_gaps(self, df, symbol, start_time, end_time, bar):
         """
-        检查K线数据时间连续性，若存在缺失则自动补获取
+        检查K线数据时间连续性：若存在缺口尝试补获取（仅一次），
+        若仍有缺口则截断到最长连续段。
         
         :param df: 当前K线数据 DataFrame
         :param symbol: 交易品种
         :param start_time: 期望的起始时间
         :param end_time: 期望的结束时间
         :param bar: K线周期
-        :return: 修复后的 DataFrame
+        :return: 修复后的 DataFrame（保证时间连续，可能被截断）
         """
         if df.empty:
             return df
-        
+
         bar_minutes = self._get_minutes_from_bar(bar)
         expected_interval = timedelta(minutes=bar_minutes)
-        
+
         # 确保按时间排序
         df = df.sort_values('timestamp').drop_duplicates('timestamp').reset_index(drop=True)
-        
-        # 找出所有时间缺口
-        gaps = []
+
         timestamps = df['timestamp'].tolist()
-        
-        # 检查起始时间到第一条数据之间是否有缺失
+
+        # ───────────────────────────────────────────────
+        # 第一步：检查缺口
+        # ───────────────────────────────────────────────
+        gaps = []
+
+        # 1) 期望起始时间 -> 第一条数据 的缺口
         if timestamps[0] > start_time + expected_interval:
             gaps.append((start_time, timestamps[0]))
-        
-        # 检查数据内部的缺口
+
+        # 2) 数据内部缺口
         for i in range(len(timestamps) - 1):
             diff = timestamps[i + 1] - timestamps[i]
-            if diff > expected_interval * 1.5:  # 容忍1.5倍间隔（防止浮点误差）
+            if diff > expected_interval * 1.5:
                 gaps.append((timestamps[i], timestamps[i + 1]))
-        
-        # 检查最后一条数据到结束时间之间是否有缺失
+
+        # 3) 最后一条数据 -> 期望结束时间 的缺口
         if timestamps[-1] < end_time - expected_interval:
             gaps.append((timestamps[-1], end_time))
-        
+
         if not gaps:
-            self._log(f"✓ K线数据时间连续性检查通过，无缺失")
+            self._log(f"✓ K线数据时间连续性检查通过，共 {len(df)} 条K线")
             return df
-        
-        self._log(f"⚠ 发现 {len(gaps)} 个时间缺口，开始补获取...")
-        
+
+        self._log(f"⚠ 发现 {len(gaps)} 个时间缺口，尝试补获取（仅一次）...")
+
+        # ───────────────────────────────────────────────
+        # 第二步：对每个缺口尝试一次补获取
+        # ───────────────────────────────────────────────
         all_new_klines = []
+        all_gaps_filled = True
+
         for gap_start, gap_end in gaps:
             if self._check_stop():
                 self._log(f"⏹ 补获取被用户停止")
+                all_gaps_filled = False
                 break
-            
-            # 缺口起始时间向后偏移一个周期（避免重复）
+
             fetch_start = gap_start + expected_interval
             fetch_end = gap_end - expected_interval
-            
+
             if fetch_start >= fetch_end:
                 continue
-            
+
             self._log(f"   补获取: [{fetch_start.strftime('%Y-%m-%d %H:%M')} - {fetch_end.strftime('%Y-%m-%d %H:%M')}]")
-            
+
             new_df = self._fetch_data_from_sources(symbol, fetch_start, fetch_end, bar)
             if new_df is not None and not new_df.empty:
                 all_new_klines.extend(new_df.to_dict('records'))
                 self._log(f"   ✓ 补获取到 {len(new_df)} 条K线")
             else:
                 self._log(f"   ✗ 该缺口补获取失败")
-        
+                all_gaps_filled = False
+
         if all_new_klines:
             new_records_df = pd.DataFrame(all_new_klines)
             df = pd.concat([df, new_records_df], ignore_index=True)
             df = df.sort_values('timestamp').drop_duplicates('timestamp').reset_index(drop=True)
-            self._log(f"✓ 缺口补获取完成，新增 {len(new_records_df)} 条，当前共 {len(df)} 条K线")
+            self._log(f"   补获取完成，当前共 {len(df)} 条K线")
+
+        # ───────────────────────────────────────────────
+        # 第三步：再次检查连续性（即使补获取成功也要再验证）
+        # 如果仍有缺口，截断到最长连续段（从第一条数据开始，直到第一个断点）
+        # ───────────────────────────────────────────────
+        timestamps_new = df['timestamp'].tolist()
+        gaps_after = []
+
+        # 检查期望起始时间 -> 第一条数据
+        if timestamps_new[0] > start_time + expected_interval:
+            gaps_after.append((start_time, timestamps_new[0]))
+
+        # 检查内部缺口
+        for i in range(len(timestamps_new) - 1):
+            diff = timestamps_new[i + 1] - timestamps_new[i]
+            if diff > expected_interval * 1.5:
+                gaps_after.append((timestamps_new[i], timestamps_new[i + 1]))
+
+        # 检查最后一条数据 -> 期望结束时间
+        if timestamps_new[-1] < end_time - expected_interval:
+            gaps_after.append((timestamps_new[-1], end_time))
+
+        if not gaps_after:
+            self._log(f"✓ 补获取后K线数据连续，共 {len(df)} 条K线")
+            return df
+
+        # 仍然有缺口 -> 截断到最长连续段
+        # 规则：从第一条数据开始，往后查找，遇到第一个缺口就停止
+        self._log(f"⚠ 补获取后仍有 {len(gaps_after)} 个缺口，将数据截断到最长连续段")
+
+        # 找到第一个内部断点位置
+        # 第一个断点可能是"期望起始->第一条"，也可能是内部某点
+        truncate_idx = len(df)  # 默认不截断（全部保留）
+
+        # 情况1：第一条数据本身就晚于 start_time，视为从第一条数据起为连续段
+        # （不截断）
+
+        # 情况2：内部有断点 -> 在第一个断点处截断
+        for i in range(len(timestamps_new) - 1):
+            diff = timestamps_new[i + 1] - timestamps_new[i]
+            if diff > expected_interval * 1.5:
+                truncate_idx = i + 1  # 保留到 i（含）
+                break
+
+        # 如果第一条数据与 start_time 之间有巨大缺口，
+        # 则实际起始点就是第一条数据（无法往前补）
+        if truncate_idx < len(df):
+            df_continuous = df.iloc[:truncate_idx].copy().reset_index(drop=True)
+            actual_start = df_continuous['timestamp'].iloc[0]
+            actual_end = df_continuous['timestamp'].iloc[-1]
+            self._log(
+                f"  数据截断: 保留 {len(df_continuous)} 条K线 "
+                f"[{actual_start.strftime('%Y-%m-%d %H:%M')} - {actual_end.strftime('%Y-%m-%d %H:%M')}]"
+            )
+            return df_continuous
         else:
-            self._log(f"⚠ 所有缺口补获取失败，数据仍可能存在缺失")
-        
-        return df
+            # 没有内部断点，但起始/结束时间可能不覆盖用户请求范围
+            # 这种情况下数据本身是连续的，只是范围可能小于用户请求
+            actual_start = df['timestamp'].iloc[0]
+            actual_end = df['timestamp'].iloc[-1]
+            self._log(
+                f"  数据连续但范围与请求不一致: {len(df)} 条K线 "
+                f"[{actual_start.strftime('%Y-%m-%d %H:%M')} - {actual_end.strftime('%Y-%m-%d %H:%M')}]"
+            )
+            return df
     
     def _delete_old_data_files(self, symbol, bar, fmt='parquet'):
         """删除同标的同周期的旧数据文件"""
